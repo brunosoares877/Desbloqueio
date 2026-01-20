@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifique seu Benefício</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="top-header">
+        <div class="top-header-content">
+            <div class="header-left">
+                <img src="https://i.postimg.cc/g2F7dGC1/logo-png.png" alt="Logo INSS" class="logo-img">
+                <div class="header-text">
+                    <h2 class="top-title">Meu INSS</h2>
+                    <p class="top-subtitle">Conheça e acesse os serviços do INSS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="carousel-container">
+        <div class="carousel-wrapper">
+            <button class="carousel-btn carousel-btn-prev" id="prevBtn">‹</button>
+            <div class="carousel">
+                <div class="carousel-slide active">
+                    <div class="slide-content">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop" alt="Notícia INSS 1" class="slide-image">
+                        <div class="slide-overlay">
+                            <h3>Novo Calendário de Pagamentos</h3>
+                            <p>Confira as datas de pagamento dos benefícios do INSS para este mês</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="slide-content">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop" alt="Notícia INSS 2" class="slide-image">
+                        <div class="slide-overlay">
+                            <h3>Atualização do Meu INSS</h3>
+                            <p>Nova funcionalidade permite consulta de benefícios sem senha</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <div class="slide-content">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop" alt="Notícia INSS 3" class="slide-image">
+                        <div class="slide-overlay">
+                            <h3>Reajuste de Benefícios</h3>
+                            <p>INSS anuncia reajuste de 4,5% nos benefícios previdenciários</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-btn-next" id="nextBtn">›</button>
+        </div>
+        <div class="carousel-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="banner-image">
+            <img src="https://i.postimg.cc/4dfd0k4x/Whats-App-Image-2026-01-20-at-18-42-13.jpg" alt="Banner INSS" class="banner-img">
+        </div>
+        
+        <header>
+            <h1>⚠️ Verifique Agora</h1>
+            <p class="subtitle">Se seu benefício está bloqueado</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <form id="cpfForm">
+                    <div class="input-group">
+                        <label for="cpfInput">Digite seu CPF:</label>
+                        <input 
+                            type="text" 
+                            id="cpfInput" 
+                            placeholder="000.000.000-00"
+                            maxlength="14"
+                            autocomplete="off"
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Verificar Benefício</button>
+                </form>
+
+                <div id="result" class="result hidden"></div>
+                
+                <div id="unlockButtonContainer" class="unlock-button-container hidden">
+                    <button id="unlockButton" class="btn-unlock">🔓 Desbloquear Agora</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
