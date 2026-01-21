@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifique seu Benefício</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Garante que o container do botão flutue na parte inferior */
+        .unlock-button-container {
+            position: fixed; /* Fixa na tela */
+            bottom: 0;       /* Cola no chão */
+            left: 0;
+            width: 100%;     /* Ocupa toda a largura */
+            background-color: #ffffff; /* Fundo branco para destacar */
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1); /* Sombra elegante para separar do conteúdo */
+            padding: 15px;   /* Espaço interno */
+            box-sizing: border-box; /* Garante que o padding não estoure a largura */
+            z-index: 9999;   /* Garante que fique por cima de tudo */
+            display: flex;
+            justify-content: center; /* Centraliza o botão */
+            
+            /* Animação suave quando aparecer */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Estilo para garantir que o botão seja grande e clicável no mobile */
+        .btn-unlock {
+            width: 100%;
+            max-width: 400px; /* Não deixa ficar gigante em telas de PC */
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none; /* Remove sublinhado de link */
+            display: block;
+            text-align: center;
+            /* Mantém as cores originais ou define padrão se não houver */
+            background-color: #28a745; 
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        
+        /* Efeito de clique */
+        .btn-unlock:active {
+            transform: scale(0.98);
+        }
+
+        /* Se a classe 'hidden' usar display: none, o botão some corretamente.
+           Se o seu CSS usar outra técnica, isso garante que suma. */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Adiciona um espaço no final da página para o conteúdo não ficar atrás do botão */
+        body {
+            padding-bottom: 100px; /* Espaço extra no final do scroll */
+        }
+    </style>
 </head>
 <body>
     <div class="top-header">
@@ -90,7 +143,7 @@
                 <div id="result" class="result hidden"></div>
                 
                 <div id="unlockButtonContainer" class="unlock-button-container hidden">
-                    <a href="https://go.perfectpay.com.br/PPU38CQ6BSS" id="unlockLink" class="btn-unlock" style="text-decoration: none; display: inline-block; text-align: center;">🔓 Desbloquear Agora</a>
+                    <a href="https://go.perfectpay.com.br/PPU38CQ6BSS" id="unlockLink" class="btn-unlock">🔓 Desbloquear Agora</a>
                 </div>
             </div>
         </main>
